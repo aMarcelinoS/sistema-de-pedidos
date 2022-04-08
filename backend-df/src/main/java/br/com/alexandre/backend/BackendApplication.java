@@ -1,13 +1,13 @@
-package br.com.alexandre.backenddf;
+package br.com.alexandre.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendDfApplication {
+public class BackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendDfApplication.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
 
 }
