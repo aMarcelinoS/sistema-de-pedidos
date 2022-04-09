@@ -3,18 +3,28 @@ package br.com.alexandre.backend.models;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Cardapio implements Serializable {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_produto")
+public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String tipo;
 	private String nome;
 	private Double preco;
 	
-	public Cardapio() {
+	public Produto() {
 	}
 
-	public Cardapio(Long id, String tipo, String nome, Double preco) {
+	public Produto(Long id, String tipo, String nome, Double preco) {
 		this.id = id;
 		this.tipo = tipo;
 		this.nome = nome;
@@ -66,7 +76,7 @@ public class Cardapio implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cardapio other = (Cardapio) obj;
+		Produto other = (Produto) obj;
 		return Objects.equals(id, other.id);
 	}
 }
