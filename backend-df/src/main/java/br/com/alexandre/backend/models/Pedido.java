@@ -1,38 +1,41 @@
 package br.com.alexandre.backend.models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_produto")
-public class Produto implements Serializable {
+@Table(name = "tb_pedido")
+public class Pedido implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String tipo;
-	private String nome;
-	private Double preco;
+	private LocalDateTime data;
+	private String status;
 	
-	@ManyToOne
-	private Pedido pedidos;
-	
-	public Produto() {
+	@OneToMany
+	private List<Produto> produtos = new ArrayList<>();
+
+	public Pedido() {
+		
 	}
 
-	public Produto(Long id, String tipo, String nome, Double preco) {
+	public Pedido(Long id, LocalDateTime data, String status) {
 		this.id = id;
-		this.tipo = tipo;
-		this.nome = nome;
-		this.preco = preco;
+		this.data = data;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -43,28 +46,24 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public LocalDateTime getData() {
+		return data;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setData(LocalDateTime data) {
+		this.data = data;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public Double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
+	public List<Produto> getProdutos() {
+		return produtos;
 	}
 
 	@Override
@@ -80,7 +79,7 @@ public class Produto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
+		Pedido other = (Pedido) obj;
 		return Objects.equals(id, other.id);
-	}
+	}	
 }

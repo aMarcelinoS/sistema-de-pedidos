@@ -1,7 +1,6 @@
 package br.com.alexandre.backend.config;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,15 +9,13 @@ import org.springframework.context.annotation.Profile;
 
 import br.com.alexandre.backend.models.Produto;
 import br.com.alexandre.backend.repositories.ProdutoRepository;
-import br.com.alexandre.backend.services.ProdutoService;
 
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
-	private ProdutoRepository produtoRepository;
-	
+	private ProdutoRepository produtoRepository;	
 	
 	@Override
 	public void run(String... args) throws Exception {
