@@ -19,22 +19,26 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produto")
 	private Long id;
+	
 	@Column(name = "categoria")
-	private String tipo;
+	private String categoria;
+	
 	@Column(name = "descricao")
-	private String nome;
+	private String descricao;
+	
 	private Double preco;
 	
 	
 	public Produto() {
 	}
 
-	public Produto(Long id, String tipo, String nome, Double preco) {
+	public Produto(Long id, String categoria, String descricao, Double preco) {
 		this.id = id;
-		this.tipo = tipo;
-		this.nome = nome;
+		this.categoria = categoria;
+		this.descricao = descricao;
 		this.preco = preco;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -42,22 +46,22 @@ public class Produto implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}	
+
+	public String getCategoria() {
+		return categoria;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Double getPreco() {
