@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.alexandre.backend.dto.PedidoDto;
-import br.com.alexandre.backend.enums.SituacaoPedido;
 import br.com.alexandre.backend.models.Pedido;
 import br.com.alexandre.backend.repositories.PedidoRepository;
 
@@ -24,7 +23,7 @@ public class PedidoService {
 	public Pedido realizaPedido(PedidoDto pedidoDto) {
 		Pedido pedido = new Pedido();
 		pedido.setDataHora(LocalDateTime.now());
-		pedido.setSituacaoPedido(SituacaoPedido.Aguardando);
+		pedido.setSituacao(Pedido.SITUACAO_AGUARDANDO);
 		pedido.setItens(pedidoDto.getItens());
 		return repository.save(pedido);		
 	}

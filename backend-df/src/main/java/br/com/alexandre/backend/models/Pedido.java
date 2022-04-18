@@ -15,17 +15,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OrderBy;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import br.com.alexandre.backend.enums.SituacaoPedido;
 
 @Entity
 @Table(name = "pedido")
 public class Pedido implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	public static String SITUACAO_AGUARDANDO = "Aguardando";
+	public static String SITUACAO_EM_PREPARACAO = "Em preparação";
+	public static String SITUACAO_SAIU_PARA_ENTREGA = "Saiu para entrega";
+	public static String SITUACAO_ENTREGUE = "Entregue";
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_seq")
+	@SequenceGenerator(name = "pedido_seq", sequenceName = "pedido_seq", allocationSize = 1)
 	@Column(name = "id_pedido")
 	private Long id;
 	
@@ -34,8 +39,6 @@ public class Pedido implements Serializable{
 	
 	@Column(name = "situacao")
 	private String situacao;
-	
-	private SituacaoPedido situacaoPedido;
 	
 	@ElementCollection
 	@CollectionTable(name = "item_pedido", joinColumns = {@JoinColumn(name = "id_pedido")})
@@ -46,11 +49,10 @@ public class Pedido implements Serializable{
 		
 	}
 	
-	public Pedido(Long id, LocalDateTime dataHora, String situacao, SituacaoPedido situacaoPedido ) {
+	public Pedido(Long id, LocalDateTime dataHora, String situacao ) {
 		this.id = id;
 		this.dataHora = dataHora;
 		this.situacao = situacao;
-		this.situacaoPedido = situacaoPedido;
 	}
 
 
@@ -84,14 +86,6 @@ public class Pedido implements Serializable{
 
 	public List<ItemPedido> getItens() {
 		return itens;
-	}
-
-	public SituacaoPedido getSituacaoPedido() {
-		return situacaoPedido;
-	}
-
-	public void setSituacaoPedido(SituacaoPedido situacaoPedido) {
-		this.situacaoPedido = situacaoPedido;
 	}
 
 	@Override

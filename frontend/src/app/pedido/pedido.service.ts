@@ -1,12 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Produto } from '../produto';
+import { Pedido, ItemPedido } from '../pedido';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PedidoService {
 
-  itens: { produto: Produto, quantidade: number }[] = [];
+  itens: ItemPedido[] = [];
+
+  constructor(private httpClient: HttpClient) {}
 
   adicionaProduto(produto: Produto) {
     let item = this.itens.find(item => item.produto.descricao === produto.descricao);
@@ -19,6 +23,13 @@ export class PedidoService {
 
   limpaPedido() {
     this.itens = [];
+  }
+
+  realizaPedido() {
+    this.httpClient.post<Pedido>("http://localhost:8080/pedidos", {
+      itens: this.itens
+    }).subscribe(pedido => {
+      console.log(pedido)});
   }
 
   get valorTotal() {
