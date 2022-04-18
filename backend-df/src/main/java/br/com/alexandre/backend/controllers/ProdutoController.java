@@ -2,6 +2,8 @@ package br.com.alexandre.backend.controllers;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,8 @@ import br.com.alexandre.backend.models.Produto;
 import br.com.alexandre.backend.services.ProdutoService;
 
 @RestController
-@RequestMapping("/cardapio")
+@Transactional
+@RequestMapping( value = "/cardapio")
 public class ProdutoController {
 
 	@Autowired
@@ -23,4 +26,6 @@ public class ProdutoController {
 		List<Produto> prod = produtoService.findAll();		
 		return ResponseEntity.ok().body(prod);
 	}
+	
+	
 }
