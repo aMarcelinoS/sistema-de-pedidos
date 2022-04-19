@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,13 @@ public class PedidoController {
 	public ResponseEntity<List<Pedido>> findAll(){
 		List<Pedido> pedidos = service.findAll();
 		return ResponseEntity.ok().body(pedidos);
+	}
+	
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<Pedido> detalhapedido(@PathVariable Long id){
+		return service.detalhePedido(id)
+				.map(x -> ResponseEntity.ok().body(x))
+				.orElse(ResponseEntity.notFound().build());		
 	}
 	
 	@PostMapping

@@ -2,6 +2,7 @@ package br.com.alexandre.backend.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,9 @@ public class PedidoService {
 		pedido.setSituacao(Pedido.SITUACAO_AGUARDANDO);
 		pedido.setItens(pedidoDto.getItens());
 		return repository.save(pedido);		
+	}
+	
+	public Optional<Pedido> detalhePedido(Long id) {
+		return repository.findById(id);		
 	}
 }
