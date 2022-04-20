@@ -32,4 +32,15 @@ public class PedidoService {
 	public Optional<Pedido> detalhePedido(Long id) {
 		return repository.findById(id);		
 	}
+	
+	public Pedido atualizaPedido(Long id, Pedido obj){
+		Pedido p = repository.getById(id);
+		atualizaDados(p, obj);
+		return repository.save(p);
+		
+	}
+
+	private void atualizaDados(Pedido p, Pedido obj) {
+		p.setSituacao(obj.getSituacao());		
+	}
 }

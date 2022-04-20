@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,5 +44,11 @@ public class PedidoController {
 	public ResponseEntity<Pedido> realizaPedido(@RequestBody PedidoDto pedido){
 		Pedido realizaPedido = service.realizaPedido(pedido);
 		return ResponseEntity.ok().body(realizaPedido);
-	}	
+	}
+	
+	@PutMapping(path = "/{id}")
+	public ResponseEntity<Pedido> atualizaStatus(@PathVariable Long id, @RequestBody Pedido obj){
+		obj = service.atualizaPedido(id, obj);
+		return ResponseEntity.ok().body(obj);
+	}
 }
